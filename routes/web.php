@@ -8,5 +8,4 @@ Route::get('/', function () {
 });
 
 Route::get('/daftar/mahasiswa', [MahasiswaController::class, 'index']);
-Route::get('/kalkulator/segitiga/{alas?}/{tinggi?}', [KalkulatorController::class, 'segitiga'])
-    ->whereNumber(['alas', 'tinggi']);
+Route::get('/kalkulator/segitiga', [KalkulatorController::class, 'segitiga']);

@@ -1,11 +1,18 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class KalkulatorController extends Controller
 {
-    public function segitiga($alas = 10, $tinggi = 5)
+    public function segitiga(Request $request)
     {
-        $luas = 0.5 * $alas * $tinggi;
-        return view('segitiga', compact('alas', 'tinggi', 'luas'));
+        $luas = null;
+
+        if ($request->filled('alas') && $request->filled('tinggi')) {
+            $luas = 0.5 * $request->alas * $request->tinggi;
+        }
+
+        return view('segitiga', compact('luas'));
     }
 }
