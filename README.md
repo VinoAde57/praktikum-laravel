@@ -16,5 +16,4 @@ Latihan dari Modul Praktikum Framework Laravel.
     php artisan serve
 
 Lalu buka http://127.0.0.1:8000/daftar/mahasiswa untuk daftar mahasiswa
-
           http://127.0.0.1:8000/kalkulator/segitiga untuk kalkulator luas segitiga
