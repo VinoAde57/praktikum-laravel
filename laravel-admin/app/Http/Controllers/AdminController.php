@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
@@ -7,59 +6,56 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $admins = Admin::all();
+        return view('admin.index', compact('admins'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'username' => 'required|max:100',
+            'password' => 'required|max:100',
+        ]);
+
+        Admin::create([
+            'username' => $request->username,
+            'password' => bcrypt($request->password),
+        ]);
+
+        return redirect('/admin')->with('success', 'Data admin berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Admin $admin)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Admin $admin)
     {
-        //
+        return view('admin.edit', compact('admin'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Admin $admin)
     {
-        //
+        $request->validate([
+            'username' => 'required|max:100',
+            'password' => 'nullable|max:100',
+        ]);
+
+        $admin->username = $request->username;
+        if ($request->filled('password')) {
+            $admin->password = bcrypt($request->password);
+        }
+        $admin->save();
+
+        return redirect('/admin')->with('success', 'Data admin berhasil diubah');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Admin $admin)
     {
-        //
+        $admin->delete();
+        return redirect('/admin')->with('success', 'Data admin berhasil dihapus');
     }
 }
