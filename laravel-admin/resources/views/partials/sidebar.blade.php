@@ -12,6 +12,7 @@
             ['service', 'Service', 'fa-cogs'],
             ['contact', 'Contact', 'fa-envelope'],
             ['about', 'About', 'fa-info-circle'],
+            ['admin', 'Admin', 'fa-user-shield'],
         ];
     @endphp
 
